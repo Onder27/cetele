@@ -1,12 +1,11 @@
+// src/components/Reports.js
 import React from "react";
 
-function Reports() {
+export default function Reports(){
   return (
-    <div style={{ padding: "20px" }}>
+    <div>
       <h2>Raporlar</h2>
-      <p>Burası raporlar sayfası. Yakında gerçek raporları göreceksin.</p>
+      <p>Burada çeşitli raporlar görünecek. Şimdilik test aşaması.</p>
     </div>
   );
 }
-
-export default Reports;

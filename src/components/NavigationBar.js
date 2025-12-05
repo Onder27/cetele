@@ -1,11 +1,16 @@
+// src/components/NavigationBar.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
-function NavigationBar() {
+export default function NavigationBar() {
+  const navigate = useNavigate();
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    window.location.href = "/"; // Çıkınca dashboard'a döner
+    // supabase signOut döndüğünde session temizlenir
+    navigate("/"); // ana sayfaya geri
+    window.location.reload(); // güvenli temizleme
   };
 
   return (
@@ -21,43 +26,9 @@ function NavigationBar() {
 }
 
 const styles = {
-  nav: {
-    width: "100%",
-    padding: "12px 24px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-    borderBottom: "1px solid #ddd",
-    position: "sticky",
-    top: 0,
-    zIndex: 1000,
-  },
-  logo: {
-    fontSize: "22px",
-    fontWeight: "bold",
-    color: "#111",
-  },
-  menu: {
-    display: "flex",
-    gap: "20px",
-    alignItems: "center",
-  },
-  link: {
-    textDecoration: "none",
-    fontSize: "16px",
-    fontWeight: "500",
-    color: "#333",
-  },
-  logoutBtn: {
-    border: "none",
-    backgroundColor: "#c62828",
-    color: "#fff",
-    fontWeight: "600",
-    padding: "6px 14px",
-    borderRadius: "4px",
-    cursor: "pointer",
-  }
+  nav: { display: "flex", justifyContent: "space-between", padding: "10px 20px", borderBottom: "1px solid #ddd", background: "#fff" },
+  logo: { fontWeight: 700, fontSize: 20 },
+  menu: { display: "flex", gap: 16, alignItems: "center" },
+  link: { textDecoration: "none", color: "#111", fontWeight: 600 },
+  logoutBtn: { background: "#c62828", color: "#fff", border: "none", padding: "6px 12px", borderRadius: 4, cursor: "pointer" }
 };
-
-export default NavigationBar;
